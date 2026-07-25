@@ -6,11 +6,13 @@ Alle Sachen die ihr braucht fur unseren *Python Einstieg Kurs*
 
 Gehen du auf releases und download die zip datei. Entpack sie dann in dem Ordner in dem du Arbeiten willst.
 
+Hier ist der Download-Link: <https://github.com/Floh4/pygamekurs/archive/refs/tags/release-test.zip>
+
 ## Pygame Setup und .venv
 
 ### WICHTIGER HINWEIS! Sobald euer Mauszeiger in der nächsten Zeile ist, läuft der Befehl. NICHTS EINTIPPEN!
 
-## Ordner "" in VsCode öffnen
+## Ordner "pygame-kurs-test" in VsCode öffnen
 
 Ihr können den Ordner mithilfe von Rechtsclick auf den Ordner und dann auf "öffnen mit Vscode" in diesem Programm öffnen
 
@@ -35,7 +37,7 @@ Danach entweder auf oben links zwischen "Run" und "Help" klicken oder einfach CT
 
 Zuletzt Diesen Befehl in eurem Terminal ausführen
 
-    pip install -r requirements.txt
+    pip install pygame
 
 Nun seit ihr mit dem Installieren fertig und könnt main.py ausführen wobei ihr keine Fehler bekommen solltet.
 
