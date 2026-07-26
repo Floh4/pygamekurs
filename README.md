@@ -50,6 +50,10 @@ Such nach "pygame" und mach ein häkchen dran
 
 Dann drück "Ok" und warte
 
+## Extensions installieren
+Zuletzt installierst du dir die "Python extension" von Microsoft und optional colorful comments von Parth Rastogi
+Wenn du nicht die Python extension installiert hast, hast du kein run button
+
 ### Teste ob es funktioniert
 
 geh in die vorlage.py datei und drück oben rechts auf den `▷` Run Python File Knopf
