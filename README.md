@@ -1,5 +1,6 @@
 # Python Kurs Starter
 
+Dieses Projekt benutzt die Bibliothek Pygame
 Alle Sachen die ihr braucht fur unseren *Python Einstieg Kurs*
 
 ## Downloaden von unserem github Repo
