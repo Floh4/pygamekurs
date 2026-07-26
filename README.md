@@ -52,6 +52,6 @@ Dann drück "Ok" und warte
 
 ### Teste ob es funktioniert
 
-geh in die vorlage.py datei und drück oben rechts auf den `▷` Run Python File
+geh in die vorlage.py datei und drück oben rechts auf den `▷` Run Python File Knopf
 
 Nun sollte im Terminal "Es funktioniert!" stehen
