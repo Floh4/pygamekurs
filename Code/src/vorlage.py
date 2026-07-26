@@ -1,4 +1,5 @@
 import pygame
+import random
 
 # * import custom library
 import sys
@@ -18,5 +19,4 @@ pygame.font.init()
 score_font = pygame.font.SysFont('Georgia', 14)
 screen = pygame.display.set_mode((850, 500))
 clock = pygame.time.Clock()
-
-#      Hier kommt dann unser Code hin
+#   Hier kommt dann unser Code hin
