@@ -8,7 +8,6 @@ project_root = Path(__file__).resolve().parent.parent
 sys.path.append(str(project_root))
 from Custom_Library.pong_extension import (Player,
                                            Ball, 
-                                           ball_start, 
                                            accelerate_ball, 
                                            keybind, 
                                            handle_exit)
