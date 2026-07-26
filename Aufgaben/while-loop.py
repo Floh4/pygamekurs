@@ -3,6 +3,7 @@
 #   - der nur läuft, wenn die variable True ist
 #   - der nur läuft, wenn eine variable unter 100 ist
 # und etwas ins terminal schreibt
+# Variable selbst kreieren
 # ~ Hier kommt der Code hin
 
 
