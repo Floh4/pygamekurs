@@ -28,8 +28,9 @@ class Player:
         """
         Anfangsattribute für die Klasse Player (Die Spieler in pong)
         Alle Paremeter:
-            pos:Position vom Spieler wenn er am 
-                Anfang geladen wird als tuple (liste in normalen klammer und unveränderlich) eingeben
+            pos: Position vom Spieler wenn er am Anfang geladen wird.
+                 Wird als tuple (liste in normalen klammer und unveränderlich) angegeben
+                 (linke obere ecke vom Rechteck)
             
             Size: Die größe vom Spieler als tuple (liste in normalen klammer und unveränderlich)
         """
@@ -44,7 +45,7 @@ class Player:
         Zeichnet den Spieler auf den Bildschirm (bildschirm als parameter noch angeben)
         (nur den Spieler da es draw eine Klasse von Player ist)
         diese funktion wird aber selten alleine verwendet sondern ist eine
-        Unterfunktion von update() da update() diese funktion enthält
+        Unterfunktion von update() da update() diese funktion enthält (siehe update())
         """
 
         # pygame.draw.rect(welcher bildschirm, (rot, grün, blau), welches rechteck)
@@ -58,7 +59,7 @@ class Player:
         updated die Attribute vom Spieler UND zeichnet den spieler mithilfe von der draw funktion
         Paramenter: welcher Bildschirm eingeben
         """
-        self.rectangle = pygame.Rect(self.pos.get_as_list(), self.size) # neues rechteck mit den richtigen positionen und größen
+        self.rectangle = pygame.Rect(self.pos.get_as_list(), self.size) # neues rechteck bzw. rechteck erneuern mit den richtigen positionen und größen
         self.middle_point = (self.pos.y + (self.size[1] / 2)) # mittelpunkt neu berechnen (wichtig für ball abprall)
         self.draw(screen) # Spieler zeichnen
 
@@ -68,6 +69,7 @@ class Ball:
         Anfangsattribute von der Klasse Ball (dieser ball in pong)
         Parameter:
             pos: Position vom Ball als tuple angeben
+                 Mittelpunkt vom Kreis
             velocity: Geschwindigkeit als tuple angeben, (x geschwindigkeit, y geschwindigkeit)
             radius: Radius vom Ball
 
@@ -80,11 +82,14 @@ class Ball:
                     - (negativ, positiv) -> ball fliegt unten links
                     - (positiv, negativ) -> ball fliegt rechts oben
                     - (negativ, negativ) -> ball fliegt rechts unten
+            
+            Um den Ball mit der velocity zu bewegen muss man jeden Loop-durchgang die position + die veloctiy machen
         """
         self.pos = Vector(pos[0], pos[1]) # somit ball.pos.y, ball.pos.x
         self.velocity = Vector(velocity[0], velocity[1]) # damit hat man ball.velocity.x und ball.velocity.y
         self.radius = radius # somit hat ball.radius einen wert
-        self.hitbox = pygame.Rect( # unsichtbare hitbox für den ball (einfach nur ein Rechteck)
+        self.hitbox = pygame.Rect( # unsichtbare hitbox für den ball (einfach nur ein Rechteck, wo der Ball drin ist)
+                                   # ist für Spieler-kolision wichtig
             self.pos.x - self.radius,
             self.pos.y - self.radius,
             self.radius * 2,
@@ -130,19 +135,19 @@ def accelerate_ball(ball_pong, diff_player_ball, geschwindigkeitsgrenze): # * Be
 
      # die bedingung schaut ob beide geschwindigkeiten unter der Geschwindigkeits grenze sind 
      # und das der abstand von diff player ball größer ist als 20
-     # desto größer der wert von diff_player_ball ist desto mehr wurde der ball an der Seite getroffen
+     # desto größer der wert von diff_player_ball ist desto mehr wird der Ball an der Seite getroffen
     if ((abs(ball_pong.velocity.x) < geschwindigkeitsgrenze and abs(ball_pong.velocity.y) < geschwindigkeitsgrenze) and abs(diff_player_ball) > 20 ):
         if ball_pong.velocity.x > 0: # je nachdem ob die velocity negativ oder positiv war wird dann soviel hinzugefügt
-            ball_pong.velocity.x += 2
+            ball_pong.velocity.x += 2 # <-- der Wert bestimmt wieviel schneller der Ball wird
         else:
-            ball_pong.velocity.x -= 2
+            ball_pong.velocity.x -= 2 # <-- der Wert bestimmt wieviel schneller der Ball wird
         ball_pong.velocity.y += 0.1 * ((diff_player_ball - 10) * -0.1)  # * Wirkungsgrad wie stark es wirken soll mit dem Winkel verändern
     # Falls das erste falsch war und nicht ging dann wird einfach eine generelle beschleunigung hinzugefügt und nichts mit dem je nach winkel wie es sich bewegen soll
     elif (ball_pong.velocity.x < geschwindigkeitsgrenze and ball_pong.velocity.y < geschwindigkeitsgrenze): # das ist für spieler
         if ball_pong.velocity.x > 0:
-            ball_pong.velocity.x += 2
+            ball_pong.velocity.x += 2 # <-- der Wert bestimmt wieviel schneller der Ball wird
         else:
-            ball_pong.velocity.x -= 2
+            ball_pong.velocity.x -= 2 # <-- der Wert bestimmt wieviel schneller der Ball wird
         ball_pong.velocity.y += 0.1
 
 def keybind(key_pygame_up, key_pygame_down, player, spielergeschwindigkeit, screen_height, player_height): 
@@ -150,20 +155,21 @@ def keybind(key_pygame_up, key_pygame_down, player, spielergeschwindigkeit, scre
     Für die Kontrolle von den Spielern mithilfe von Tasten
     Parameter:
         key_pygame_up: welche taste gedrückt werden muss damit der spieler sich nach oben bewegt
-        key_pygame_down: welche taste gedrückt werden muss damit der spieler sich nach unte bewegt
-        player: welcher spieler überhaupt von den beiden
+        key_pygame_down: welche taste gedrückt werden muss damit der spieler sich nach unten bewegt
+        player: welcher spieler betroffen ist
         spielergeschwindigkeit: selbsterklärend
-        screen_height: höhe vom Bildschirm, die konstante die wird dazu definiert haben
+        screen_height: höhe vom Bildschirm, die konstante die wir dazu definiert haben
         player_height: höhe vom spieler, auch die eine konstante
+                       dafür da dass der Spieler nicht aus dem Spielfeld kann
     """
     key = pygame.key.get_pressed()
-    if key[key_pygame_up] and player.pos.y > 0: # * damit der ball an der decke nicht runter geht
+    if key[key_pygame_up] and player.pos.y > 0: # * damit der ball nicht in die decke moven kann
         player.move(spielergeschwindigkeit)
-    if key[key_pygame_down] and player.pos.y < screen_height - player_height: # * damit der ball an dem boden nicht runter geht
+    if key[key_pygame_down] and player.pos.y < screen_height - player_height: # * damit der ball nicht in boden moven kann
         player.move(-spielergeschwindigkeit)
 
 def handle_exit():
-    """wenn man auf fenster schließen klickt damit es auch wirklich schließt"""
+    """wenn man auf fenster schließen klickt damit es auch schließt"""
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             pygame.quit()
