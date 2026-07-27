@@ -7,11 +7,11 @@ Alle Sachen die ihr braucht fur unseren *Python Einstieg Kurs*
 
 Geh auf Code und drück dann unten auf "Download ZIP". Oder drück auf den Download link
 
-Hier ist der Download-Link: <https://github.com/Floh4/pygamekurs/archive/refs/tags/release-test.zip>
+Hier ist der Download-Link: <https://github.com/Floh4/pygamekurs/archive/refs/tags/final.zip>
 
 Entpacke den Ordner dann dort wo du Arbeiten willst
 
-## Ordner "pygame-kurs-test" in VsCode öffnen
+## Ordner "pygamekurs-final" in VsCode öffnen
 
 Ihr können den Ordner mithilfe von Rechtsklick auf den Ordner und dann auf "öffnen mit Vscode" in diesem Programm öffnen
 
